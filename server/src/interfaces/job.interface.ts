@@ -5,6 +5,7 @@ export enum QueueName {
   FACE_DETECTION = 'faceDetection',
   FACIAL_RECOGNITION = 'facialRecognition',
   SMART_SEARCH = 'smartSearch',
+  DUPLICATE_DETECTION = 'duplicateDetection',
   BACKGROUND_TASK = 'backgroundTask',
   STORAGE_TEMPLATE_MIGRATION = 'storageTemplateMigration',
   MIGRATION = 'migration',
@@ -83,6 +84,7 @@ export enum JobName {
   // smart search
   QUEUE_SMART_SEARCH = 'queue-smart-search',
   SMART_SEARCH = 'smart-search',
+  DUPLICATE_DETECTION = 'duplicate-detection',
 
   // XMP sidecars
   QUEUE_SIDECAR = 'queue-sidecar',
@@ -198,6 +200,7 @@ export type JobItem =
   // Smart Search
   | { name: JobName.QUEUE_SMART_SEARCH; data: IBaseJob }
   | { name: JobName.SMART_SEARCH; data: IEntityJob }
+  | { name: JobName.DUPLICATE_DETECTION; data: IEntityJob }
 
   // Filesystem
   | { name: JobName.DELETE_FILES; data: IDeleteFilesJob }
