@@ -61,6 +61,7 @@ export interface AssetBuilderOptions {
   isArchived?: boolean;
   isFavorite?: boolean;
   isTrashed?: boolean;
+  isDuplicate?: boolean;
   albumId?: string;
   personId?: string;
   userIds?: string[];
@@ -186,9 +187,10 @@ export interface IAssetRepository {
   getTimeBuckets(options: TimeBucketOptions): Promise<TimeBucketItem[]>;
   getTimeBucket(timeBucket: string, options: TimeBucketOptions): Promise<AssetEntity[]>;
   upsertExif(exif: Partial<ExifEntity>): Promise<void>;
-  upsertJobStatus(jobStatus: Partial<AssetJobStatusEntity>): Promise<void>;
+  upsertJobStatus(jobStatus: Partial<AssetJobStatusEntity> | Partial<AssetJobStatusEntity>[]): Promise<void>;
   getAssetIdByCity(userId: string, options: AssetExploreFieldOptions): Promise<SearchExploreItem<string>>;
   getAssetIdByTag(userId: string, options: AssetExploreFieldOptions): Promise<SearchExploreItem<string>>;
+  getDuplicates(options: AssetBuilderOptions): Promise<AssetEntity[]>;
   searchMetadata(query: string, userIds: string[], options: MetadataSearchOptions): Promise<AssetEntity[]>;
   getAllForUserFullSync(options: AssetFullSyncOptions): Promise<AssetEntity[]>;
   getChangedDeltaSync(options: AssetDeltaSyncOptions): Promise<AssetEntity[]>;
