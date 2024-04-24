@@ -27,6 +27,12 @@ export class ActivityRepository implements IActivityRepository {
         assetId: assetId === null ? IsNull() : assetId,
         albumId,
         isLiked,
+        asset: {
+          deletedAt: IsNull(),
+        },
+        user: {
+          deletedAt: IsNull(),
+        },
       },
       relations: {
         user: true,
@@ -34,6 +40,7 @@ export class ActivityRepository implements IActivityRepository {
       order: {
         createdAt: 'ASC',
       },
+      withDeleted: true,
     });
   }
 
@@ -48,10 +55,21 @@ export class ActivityRepository implements IActivityRepository {
   @GenerateSql({ params: [DummyValue.UUID, DummyValue.UUID] })
   getStatistics(assetId: string, albumId: string): Promise<number> {
     return this.repository.count({
-      where: { assetId, albumId, isLiked: false },
+      where: {
+        assetId,
+        albumId,
+        isLiked: false,
+        asset: {
+          deletedAt: IsNull(),
+        },
+        user: {
+          deletedAt: IsNull(),
+        },
+      },
       relations: {
         user: true,
       },
+      withDeleted: true,
     });
   }
 

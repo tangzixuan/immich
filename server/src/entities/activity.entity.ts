@@ -40,10 +40,10 @@ export class ActivityEntity {
   @Column({ type: 'boolean', default: false })
   isLiked!: boolean;
 
-  @ManyToOne(() => AssetEntity, { onDelete: 'CASCADE', onUpdate: 'CASCADE', nullable: true })
+  @ManyToOne(() => AssetEntity, { onDelete: 'CASCADE', nullable: true })
   asset!: AssetEntity | null;
 
-  @ManyToOne(() => UserEntity, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  @ManyToOne(() => UserEntity, { onDelete: 'CASCADE' })
   user!: UserEntity;
 
   @ManyToOne(() => AlbumEntity, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
